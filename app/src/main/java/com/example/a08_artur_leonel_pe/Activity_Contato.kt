@@ -37,6 +37,7 @@ class Activity_Contato : AppCompatActivity(), NavigationView.OnNavigationItemSel
         //Inflar o activity main no frame_content do layout base
         layoutInflater.inflate(R.layout.activity_contato, findViewById(R.id.frame_content))
 
+        //Lógica para levar para uma pagina web
         findViewById<Button>(R.id.rota_Button).setOnClickListener{
             val link = Uri.parse("https://maps.app.goo.gl/ZZC3Z7fWbzxRMugr8")
             val intent = Intent(Intent.ACTION_VIEW, link)

@@ -22,6 +22,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserratalternatessemibold"
+        android:text="Escolha uma modalidade:"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="A WorldSkills é uma competição global que reúne jovens profissionais de diversas áreas para demonstrar suas habilidades em padrões internacionais. Organizada a cada dois anos, a competição promove a excelência técnica e a troca de conhecimento entre os competidores de diferentes países, incentivando a educação e o treinamento vocacional."
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
+        android:text="A modalidade Automotiva abrange a manutenção e reparo de veículos. Os competidores são testados em áreas como eletrônica automotiva, diagnóstico de falhas e reparo de sistemas mecânicos, destacando a importância da precisão técnica e do conhecimento atualizado sobre novas tecnologias no setor automotivo."
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="360dp"
+        android:layout_height="217dp"
+        android:text="Desenho Mecânico em CAD foca na criação de modelos digitais precisos para manufatura. Os participantes utilizam software de CAD para projetar peças e montagens complexas, seguindo especificações rigorosas. A precisão e a atenção aos detalhes são cruciais para alcançar um resultado de alta qualidade."
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
     <ImageView
         android:id="@+id/menu"
         android:layout_width="36dp"
@@ -32,5 +81,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="146dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="82dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/image" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="105dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="156dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:srcCompat="@drawable/image4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

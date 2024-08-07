@@ -23,12 +23,14 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/montserratalternatessemibold"
         android:text="Mais Informações"
         android:textColor="@color/white"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="716dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rota_Button" />
 
     <TextView
         android:id="@+id/textView2"
@@ -69,6 +71,7 @@
 
 
         <EditText
+            android:id="@+id/mensagem"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
@@ -90,6 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -111,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/nome"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_marginTop="12dp"
@@ -151,6 +155,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/maps" />
+
+    <ScrollView
+        android:layout_width="380dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Na modalidade de Computação em Nuvem, os competidores trabalham com a configuração e gerenciamento de infraestruturas de TI baseadas em nuvem. Eles devem demonstrar habilidades em segurança, escalabilidade e automação, atendendo às necessidades de empresas que dependem da nuvem para suas operações."
+                android:textColor="@color/white"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

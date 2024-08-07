@@ -46,6 +46,8 @@ class Activity_Configuracoes : AppCompatActivity(), NavigationView.OnNavigationI
 
         //Inflar o activity main no frame_content do layout base
         layoutInflater.inflate(R.layout.activity_configuracoes, findViewById(R.id.frame_content))
+
+        //Código para ao apertar o botão, salvar
         findViewById<Button>(R.id.button).setOnClickListener{
             AlertDialog.Builder(this).setMessage("Deseja Realmente Salvar?").setPositiveButton("Sim") { _, _ ->
                 Toast.makeText(this, "Salvo Com Sucesso", Toast.LENGTH_SHORT).show()
