@@ -2,6 +2,7 @@ package com.example.a08_artur_leonel_pe
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
@@ -16,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.internal.NavigationMenu
 import com.google.android.material.navigation.NavigationView
+import java.nio.channels.InterruptedByTimeoutException
 
 class Activity_Contato : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     //declarando o drawerlayout
@@ -34,6 +36,12 @@ class Activity_Contato : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         //Inflar o activity main no frame_content do layout base
         layoutInflater.inflate(R.layout.activity_contato, findViewById(R.id.frame_content))
+
+        findViewById<Button>(R.id.rota_Button).setOnClickListener{
+            val link = Uri.parse("https://maps.app.goo.gl/ZZC3Z7fWbzxRMugr8")
+            val intent = Intent(Intent.ACTION_VIEW, link)
+            startActivity(intent)
+        }
 
         //Botão do menu caso seja acionado, ele abre o menu
         val menu = findViewById<ImageView>(R.id.menu).setOnClickListener{
