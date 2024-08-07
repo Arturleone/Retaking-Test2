@@ -1,6 +1,7 @@
 package com.example.a08_artur_leonel_pe
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -41,16 +42,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_Home -> {
-
+                //Já está aqui
             }
             R.id.nav_contato -> {
-
+                startActivity(Intent(this, Activity_Contato::class.java))
             }
             R.id.nav_Configurações -> {
-
+                startActivity(Intent(this, Activity_Configuracoes::class.java))
             }
             R.id.nav_WorldSkills -> {
-
+                startActivity(Intent(this, Activity_WorldSkills::class.java))
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
