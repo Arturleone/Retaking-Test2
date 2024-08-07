@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/nav_Home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/nav_WorldSkills"
+        android:title="WorldSkills"/>
+    <item
         android:id="@+id/nav_contato"
-        android:title="@string/app_name"/>
+        android:title="Contato"/>
+    <item
+        android:id="@+id/nav_Configurações"
+        android:title="Settings"/>
+
 </menu>
