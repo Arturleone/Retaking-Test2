@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
@@ -43,6 +44,7 @@ class Activity_Configuracoes : AppCompatActivity(), NavigationView.OnNavigationI
         drawerLayout = findViewById(R.id.drawer_layout)
         var navView = findViewById<NavigationView>(R.id.navView)
         navView.setNavigationItemSelectedListener (this)
+        val darkSwitch = findViewById<Switch>(R.id.darkmode)
 
         //Inflar o activity main no frame_content do layout base
         layoutInflater.inflate(R.layout.activity_configuracoes, findViewById(R.id.frame_content))
@@ -67,11 +69,19 @@ class Activity_Configuracoes : AppCompatActivity(), NavigationView.OnNavigationI
             }
         }
 
+        darkSwitch.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+    }
+
         //Botão do menu caso seja acionado, ele abre o menu
         val menu = findViewById<ImageView>(R.id.menu).setOnClickListener{
             drawerLayout.openDrawer(GravityCompat.START)
         }
-    }
 
     //Menu Em Ação
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

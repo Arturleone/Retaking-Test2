@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,41 +34,63 @@ class Activity_Contato : AppCompatActivity(), NavigationView.OnNavigationItemSel
         //declarando os widgets/views
         drawerLayout = findViewById(R.id.drawer_layout)
         var navView = findViewById<NavigationView>(R.id.navView)
-        navView.setNavigationItemSelectedListener (this)
+        navView.setNavigationItemSelectedListener(this)
+        val nome = findViewById<EditText>(R.id.nome)
+        val email = findViewById<EditText>(R.id.email)
+        val mensagem = findViewById<EditText>(R.id.mensagem)
 
         //Inflar o activity main no frame_content do layout base
         layoutInflater.inflate(R.layout.activity_contato, findViewById(R.id.frame_content))
 
         //Lógica para levar para uma pagina web
-        findViewById<Button>(R.id.rota_Button).setOnClickListener{
+        findViewById<Button>(R.id.rota_Button).setOnClickListener {
             val link = Uri.parse("https://maps.app.goo.gl/ZZC3Z7fWbzxRMugr8")
             val intent = Intent(Intent.ACTION_VIEW, link)
             startActivity(intent)
         }
 
-        //Botão do menu caso seja acionado, ele abre o menu
-        val menu = findViewById<ImageView>(R.id.menu).setOnClickListener{
-            drawerLayout.openDrawer(GravityCompat.START)
+        findViewById<Button>(R.id.button2).setOnClickListener {
+            val inputNome = nome.text.toString()
+            val inputEmail = email.text.toString()
+            val inputMensage = mensagem.text.toString()
+
+            if (inputMensage.isBlank() && inputEmail.isBlank() && inputNome.isBlank()) {
+                Toast.makeText(this, "Campos Inválidos!! \uD83E\uDD14", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Dados recebidos com sucesso!! \uD83D\uDE0A",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            //Botão do menu caso seja acionado, ele abre o menu
+            val menu = findViewById<ImageView>(R.id.menu).setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
     }
 
-    //Menu Em Ação
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_Home -> {
-                startActivity(Intent(this, MainActivity::class.java))
+        //Menu Em Ação
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+            when (item.itemId) {
+                R.id.nav_Home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+
+                R.id.nav_contato -> {
+                    //Já Está Aqui
+                }
+
+                R.id.nav_Configurações -> {
+                    startActivity(Intent(this, Activity_Configuracoes::class.java))
+                }
+
+                R.id.nav_WorldSkills -> {
+                    startActivity(Intent(this, Activity_WorldSkills::class.java))
+                }
             }
-            R.id.nav_contato -> {
-                //Já Está Aqui
-            }
-            R.id.nav_Configurações -> {
-                startActivity(Intent(this, Activity_Configuracoes::class.java))
-            }
-            R.id.nav_WorldSkills -> {
-                startActivity(Intent(this, Activity_WorldSkills::class.java))
-            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            return true
         }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
     }
-}
