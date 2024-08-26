@@ -1,7 +1,7 @@
 package com.example.a08_artur_leonel_pe
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,25 +9,21 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.internal.NavigationMenu
 import com.google.android.material.navigation.NavigationView
+import androidx.core.view.WindowCompat
 
 class Activity_Configuracoes : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    //declarando o drawerlayout
+
     private lateinit var drawerLayout: DrawerLayout
-    private var notification = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isCharged ->
-        if (isCharged) {
+    private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
             showMessage("Notificação Ativada Com Sucesso!!")
         } else {
             showMessage("Notificação Recusada")
@@ -37,73 +33,69 @@ class Activity_Configuracoes : AppCompatActivity(), NavigationView.OnNavigationI
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.base)
 
-        //declarando os widgets/views
+        // Configurando o DrawerLayout e o NavigationView
         drawerLayout = findViewById(R.id.drawer_layout)
-        var navView = findViewById<NavigationView>(R.id.navView)
-        navView.setNavigationItemSelectedListener (this)
-        val darkSwitch = findViewById<Switch>(R.id.darkmode)
+        val navView = findViewById<NavigationView>(R.id.navView)
+        navView.setNavigationItemSelectedListener(this)
 
-        //Inflar o activity main no frame_content do layout base
+        // Inflar o layout da Activity_Configuracoes no frame_content
         layoutInflater.inflate(R.layout.activity_configuracoes, findViewById(R.id.frame_content))
 
-        //Código para ao apertar o botão, salvar
-        findViewById<Button>(R.id.button).setOnClickListener{
-            AlertDialog.Builder(this).setMessage("Deseja Realmente Salvar?").setPositiveButton("Sim") { _, _ ->
-                Toast.makeText(this, "Salvo Com Sucesso", Toast.LENGTH_SHORT).show()
-            }.setNegativeButton("Não") {_,_ ->
-                null
-            }.show()
+        // Configurar o botão de menu para abrir o DrawerLayout
+        findViewById<ImageView>(R.id.menu).setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        // Configurar o botão de salvar com um AlertDialog
+        findViewById<Button>(R.id.button).setOnClickListener {
+            AlertDialog.Builder(this)
+                .setMessage("Deseja Realmente Salvar?")
+                .setPositiveButton("Sim") { _, _ ->
+                    Toast.makeText(this, "Salvo Com Sucesso", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Não", null)
+                .show()
+        }
+
+        // Configurar o Switch de notificações
         findViewById<Switch>(R.id.notificacoes).setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 if (NotificationManagerCompat.from(this).areNotificationsEnabled()) {
                     showMessage("Notificação Ativada!!")
-                }
-                else {
-                    notification.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
             }
         }
 
-        darkSwitch.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        // Configurar o Switch de modo escuro
+        findViewById<Switch>(R.id.darkmode).setOnCheckedChangeListener { _, isChecked ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 
-        //Botão do menu caso seja acionado, ele abre o menu
-        val menu = findViewById<ImageView>(R.id.menu).setOnClickListener{
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-    //Menu Em Ação
+    // Lidar com seleção de itens do NavigationView
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_Home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-            R.id.nav_contato -> {
-                startActivity(Intent(this, Activity_Contato::class.java))
-            }
+            R.id.nav_Home -> startActivity(Intent(this, MainActivity::class.java))
+            R.id.nav_contato -> startActivity(Intent(this, Activity_Contato::class.java))
             R.id.nav_Configurações -> {
-                //Já está aqui
+                // Já está aqui
             }
-            R.id.nav_WorldSkills -> {
-                startActivity(Intent(this, Activity_WorldSkills::class.java))
-            }
+            R.id.nav_WorldSkills -> startActivity(Intent(this, Activity_WorldSkills::class.java))
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    private fun showMessage (message:String) {
+    // Função para exibir mensagens Toast
+    private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
